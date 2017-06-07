@@ -2,17 +2,64 @@
 <head>
     <title>This Exercise</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
+    <style>
+        body {
+            font-size: 16px;
+        }
+
+        button {
+            background: #3B5998;
+            border: none;
+            border-radius: 4px;
+            color: #fff;
+            cursor:pointer;
+            font-size: 18px;
+            padding: 1em;
+        }
+
+        pre {
+            margin: 2em 0;
+        }
+
+        .wrapper {
+            margin: 0 auto;
+            max-width: 1120px;
+            padding: 2rem;
+        }
+    </style>
 </head>
 <body>
-    <div class="wrapper" style="padding: 2em; margin: 0 auto;">
-        <button id="button" type="button" style="cursor:pointer; font-size: 18px; padding: 1em; background: #3B5998; color: #fff; border: none; border-radius: 4px;">Click Me and check the console!!</button>
-        <p>
-            Source: <a href="http://javascriptissexy.com/understand-javascripts-this-with-clarity-and-master-it/">Understand Javascripts this with Clarity and Master It</a>
-        </p>
-        <p>
-            Followup: <a href="https://bocoup.com/blog/the-many-faces-of-functions-in-javascript">The Many Faces of Functions in Javascript</a>
-        </p>
+    <div class="wrapper">
+        <button id="button" type="button">Click Me and check the console!!</button>
+        <pre>
+            var user = {
+            data:[
+                    {name:"C. Damnage", age:37},
+                    {name:"T. Jones", age:43},
+                    {name:"D. West", age:40},
+                    {name:"K. Slayfield", age:39}
+                ],
+                clickHandler:function (event) {
+                    // Math.floor(Math.random() * (max - min + 1)) + min
+                    var randomNum = Math.floor(Math.random() * (3 - 0 + 1) - 0);
+
+                    // This line is printing a random person's name and age from the data array
+                    console.log(this.data[randomNum].name + " " + this.data[randomNum].age);
+                }
+            };
+            document.getElementById('button').onclick = user.clickHandler;
+        </pre>
     </div>
+    <footer>
+        <div class="wrapper">
+            <p>
+                Source: <a href="http://javascriptissexy.com/understand-javascripts-this-with-clarity-and-master-it/">Understand Javascripts this with Clarity and Master It</a>
+            </p>
+            <p>
+                Followup: <a href="https://bocoup.com/blog/the-many-faces-of-functions-in-javascript">The Many Faces of Functions in Javascript</a>
+            </p>
+        </div>
+    </footer>
     <script>
         // We have a simple object with a clickHandler method that we want to use when a button on the page is clicked​
         var user = {
