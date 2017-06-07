@@ -10,26 +10,52 @@
   <p>
     Followup: <a href="https://bocoup.com/blog/the-many-faces-of-functions-in-javascript">The Many Faces of Functions in Javascript</a>
   </p>
+  <div id="qunit"></div>
+  <div id="qunit-fixture"></div>
+
+  <!-- Load the QUnit Testing Framework from CDN - this is the important bit ... -->
+  <script src="https://code.jquery.com/qunit/qunit-1.18.0.js"></script>
+  <!-- Load Blanket.js from CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/blanket.js/1.1.4/blanket.js"></script>
+  <script>
+    /* Test Script */
+    /* istanbul ignore next */
+    if (typeof module !== 'undefined' && module.exports) { // check we're server-side
+        var QUnit = require('qunitjs'); // require QUnit node.js module
+        // alias the QUnit.test method so we don't have to change all our tests
+        var test = QUnit.test; // stores a copy of QUnit.test
+        require('qunit-tap')(QUnit, console.log); // use console.log for test output
+        var getChange = require('./change.js'); // load our getChange method
+    }
+
+    test('getChange(215, 300) should return [50, 20, 10, 5]', function(assert) {
+        var result = getChange(215, 300); // expect an array containing [50,20,10,5]
+        var expected = [50, 20, 10, 5];
+        assert.deepEqual(result, expected);
+    });
+
+    /* istanbul ignore next */
+    if (typeof module !== 'undefined' && module.exports) { QUnit.load(); } // run the tests
+  </script>
+  <script>
+    // We have a simple object with a clickHandler method that we want to use when a button on the page is clicked​
+    var user = {
+      data:[
+        {name:"C. Damnage", age:37},
+        {name:"T. Jones", age:43},
+        {name:"D. West", age:40},
+        {name:"K. Slayfield", age:39}
+      ],
+      clickHandler:function (event) {
+        // Math.floor(Math.random() * (max - min + 1)) + min
+        var randomNum = Math.floor(Math.random() * (3 - 0 + 1) - 0);
+
+        // This line is printing a random person's name and age from the data array
+        console.log(this.data[randomNum].name + " " + this.data[randomNum].age);
+      }
+    };
+
+    document.getElementById('button').onclick = user.clickHandler;
+  </script>
 </body>
-<script>
-// We have a simple object with a clickHandler method that we want to use when a button on the page is clicked​
-var user = {
-  data:[
-    {name:"C. Damnage", age:37},
-    {name:"T. Jones", age:43},
-    {name:"D. West", age:40},
-    {name:"K. Slayfield", age:39}
-  ],
-  clickHandler:function (event) {
-    // Math.floor(Math.random() * (max - min + 1)) + min
-    var randomNum = Math.floor(Math.random() * (3 - 0 + 1) - 0);
-
-    // This line is printing a random person's name and age from the data array
-    console.log(this.data[randomNum].name + " " + this.data[randomNum].age);
-  }
-}
-var button1 = document.getElementById('button');
-
-document.getElementById('button').onclick = user.clickHandler;
-</script>
 </html>
